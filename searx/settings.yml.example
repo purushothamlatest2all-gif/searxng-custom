@@ -4464,10 +4464,10 @@ server:
     X-Robots-Tag: noindex, nofollow
   http_protocol_version: '1.0'
   image_proxy: false
-  limiter: true
+  limiter: false
   method: POST
   port: 8888
-  public_instance: true
+  public_instance: false
   secret_key: ultrasecretkey_change_this_to_a_random_string
   pass_ip:
   - 49.43.240.163

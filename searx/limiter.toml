@@ -1,21 +1,9 @@
-# SearXNG Rate Limiter Configuration
-# Lenient settings for public instance - humans can search freely
-# https://docs.searxng.org/admin/searx.limiter.html
-
 [botdetection.ip_limit]
-# Link token provides additional bot protection
 link_token = true
 
 [botdetection.ip_lists]
-# Whitelist admin IPs - these NEVER get rate limited
 pass_ip = [
   "127.0.0.0/8",
   "162.0.230.191/32",
   "49.43.240.163/32",
 ]
-
-[botdetection.ip_limit.filter_request]
-# Very lenient limits - allows normal human browsing
-# Limit: 60 requests per 300 seconds (1 every 5 seconds avg)
-limit = 60
-burst = 30

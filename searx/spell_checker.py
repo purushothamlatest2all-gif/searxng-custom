@@ -4,8 +4,8 @@ from typing import Dict, List
 _spelling_instance = None
 _custom_freq = {}
 _lock = threading.Lock()
-DICT_PATH = "os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "spell_models", "")frequency_dictionary_en_82_765.txt"
-CUSTOM_PATH = "os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "spell_models", "")custom_freq.txt"
+DICT_PATH = "/usr/local/searxng/searxng/spell_models/frequency_dictionary_en_82_765.txt"
+CUSTOM_PATH = "/usr/local/searxng/searxng/spell_models/custom_freq.txt"
 
 def get_checker():
     global _spelling_instance, _custom_freq

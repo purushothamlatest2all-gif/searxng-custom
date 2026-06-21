@@ -31,7 +31,7 @@ spell_checker = None
 if SYMSPELL_AVAILABLE:
     try:
         spell_checker = SymSpell(max_dictionary_edit_distance=2, prefix_length=7)
-        dictionary_path = "os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "frequency_dictionary_en_82_765.txt")"
+        dictionary_path = "/usr/local/searxng/searxng/searx/data/frequency_dictionary_en_82_765.txt"
         if not spell_checker.load_dictionary(dictionary_path, term_index=0, count_index=1):
             print(f"Warning: Could not load spell dictionary from {dictionary_path}")
             spell_checker = None
