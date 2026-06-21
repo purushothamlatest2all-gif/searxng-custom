@@ -157,3 +157,31 @@ Contributions are welcome! Please:
 ---
 
 **Live Demo:** https://search.latest2all.com
+
+
+## 📸 Screenshots & Demos
+
+### Home Page
+
+| Screenshot | Description |
+|------------|-------------|
+| ![Home Page 1](assets/screenshots/Latest2all-searxng-home-page-1.gif) | Modern search interface with custom branding |
+| ![Home Page 2](assets/screenshots/Latest2all-searxng-home-page-2.gif) | Category filters and search options |
+| ![Home Page 3](assets/screenshots/Latest2all-searxng-home-page-3.gif) | Voice search and autocomplete features |
+| ![Home Page 4](assets/screenshots/Latest2all-searxng-home-page-4.gif) | Responsive design on different viewports |
+| ![Home Page 5](assets/screenshots/Latest2all-searxng-home-page-5.gif) | Custom UI with gradient theme |
+
+### Search Results & AI Features
+
+| Screenshot | Description |
+|------------|-------------|
+| ![Result Page 1](assets/screenshots/Latest2all-searxng-result-page-1.gif) | Search results with engine indicators |
+| ![Result Page 2](assets/screenshots/Latest2all-searxng-result-page-2.gif) | Pagination and result navigation |
+| ![Result Page 3](assets/screenshots/Latest2all-searxng-result-page-3.gif) | Result metadata and source tracking |
+| ![Result Page 4](assets/screenshots/Latest2all-searxng-result-page-4.gif) | Filter and sort options |
+| ![Result Page 5](assets/screenshots/Latest2all-searxng-result-page-5.gif) | Mobile-responsive results view |
+| ![AI Overview](assets/screenshots/Latest2all-searxng-result-page-AI-overview.gif) | **AI Overview** - LexRank-powered summarization at the top of results |
+
+### 🎥 Live Demo
+
+Try it yourself: **https://search.latest2all.com**
