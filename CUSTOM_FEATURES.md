@@ -181,6 +181,7 @@ Contributions are welcome! Please:
 | ![Result Page 4](assets/screenshots/Latest2all-searxng-result-page-4.gif) | Filter and sort options |
 | ![Result Page 5](assets/screenshots/Latest2all-searxng-result-page-5.gif) | Mobile-responsive results view |
 | ![AI Overview](assets/screenshots/Latest2all-searxng-result-page-AI-overview.gif) | **AI Overview** - LexRank-powered summarization at the top of results |
+| ![AI Overview + Spell Check](assets/screenshots/Latest2all-searxng-result-page-AI-overview-with-basic-spell-check.gif) | **AI Overview with Spell Check** - Combined AI summary and real-time spell correction |
 
 ### 🎥 Live Demo
 
