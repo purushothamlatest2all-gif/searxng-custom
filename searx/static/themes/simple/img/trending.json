@@ -1,0 +1,52 @@
+[
+  {
+    "title": "Loupe \u2013 A iOS app that raises awareness about what native apps can see",
+    "url": "https://github.com/mysk-research/loupe",
+    "score": 337
+  },
+  {
+    "title": "Renting a sewing machine from the library",
+    "url": "https://www.bbc.com/future/article/20260618-the-weird-and-wonderful-libraries-of-finland",
+    "score": 251
+  },
+  {
+    "title": "Developers don't understand CORS (2019)",
+    "url": "https://fosterelli.co/developers-dont-understand-cors",
+    "score": 230
+  },
+  {
+    "title": "Slow breathing modulates brain function and risk behavior",
+    "url": "https://www.cell.com/neuron/fulltext/S0896-6273(26)00339-9",
+    "score": 229
+  },
+  {
+    "title": "Epoll vs. io_uring in Linux",
+    "url": "https://sibexi.co/posts/epoll-vs-io_uring/",
+    "score": 186
+  },
+  {
+    "title": "Google Hits 50% IPv6",
+    "url": "https://blog.apnic.net/2026/04/28/google-hits-50-ipv6/",
+    "score": 170
+  },
+  {
+    "title": "Running MicroVMs in Proxmox VE, the Easy Way",
+    "url": "https://taoofmac.com/space/blog/2026/06/18/1845",
+    "score": 88
+  },
+  {
+    "title": "Zigzag Decoding with AVX-512",
+    "url": "https://zeux.io/2026/06/17/zigzag-decoding-avx512/",
+    "score": 84
+  },
+  {
+    "title": "A 3D voxel game engine written in APL",
+    "url": "https://github.com/namgyaaal/avoxelgame",
+    "score": 68
+  },
+  {
+    "title": "Windows UI evolution: Clicking an unassociated file",
+    "url": "https://movq.de/blog/postings/2026-06-20/0/POSTING-en.html",
+    "score": 47
+  }
+]

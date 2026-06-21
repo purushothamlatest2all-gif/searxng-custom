@@ -1,0 +1,138 @@
+/* ============================================
+   ULTIMATE FIX - REMOVE ALL POSSIBLE LINES
+   ============================================ */
+
+/* Remove ALL borders, backgrounds, and shadows from search area */
+#search,
+#search *,
+#search_header,
+#search_header *,
+#search_view,
+#search_view *,
+.search_box,
+.search_box *,
+.search_filters,
+.search_filters *,
+#categories,
+#categories *,
+#categories_container,
+#categories_container *,
+.main-content,
+.main-content > * {
+    border: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    background-image: none !important;
+    background: transparent !important;
+}
+
+/* Remove ALL pseudo-elements that might create lines */
+#search::before,
+#search::after,
+#search_header::before,
+#search_header::after,
+.search_box::before,
+.search_box::after,
+.search_filters::before,
+.search_filters::after,
+#categories::before,
+#categories::after,
+#categories_container::before,
+#categories_container::after,
+.main-content::before,
+.main-content::after {
+    display: none !important;
+    content: none !important;
+    border: none !important;
+    background: none !important;
+}
+
+/* Specific fix for search_header - remove border-bottom */
+#search_header {
+    border-bottom: none !important;
+    border: none !important;
+}
+
+/* Specific fix for search_box - remove box-shadow */
+.search_box {
+    box-shadow: none !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+/* Specific fix for category buttons */
+.category,
+.category_button,
+button.category,
+.category_button.selected,
+#categories button {
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    background: transparent !important;
+}
+
+/* Remove focus states */
+#q:focus,
+.search_box:focus-within,
+.category:focus,
+.category_button:focus,
+button.category:focus {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Remove any hr elements */
+#search hr,
+#search_header hr,
+.search_box hr,
+.search_filters hr,
+#categories hr {
+    display: none !important;
+    height: 0 !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 480px) {
+    .search_box { padding: 8px !important; }
+    #q { font-size: 14px !important; }
+    .category_button { padding: 6px 8px !important; font-size: 12px !important; }
+}
+
+@media (min-width: 481px) and (max-width: 1024px) {
+    .search_box { padding: 10px !important; }
+    #q { font-size: 15px !important; }
+    .category_button { padding: 8px 10px !important; font-size: 13px !important; }
+}
+
+@media (min-width: 1025px) and (max-width: 1920px) {
+    .search_box { padding: 12px !important; }
+    #q { font-size: 16px !important; }
+    .category_button { padding: 10px 12px !important; font-size: 14px !important; }
+}
+
+@media (min-width: 1921px) {
+    .search_box { padding: 14px !important; }
+    #q { font-size: 18px !important; }
+    .category_button { padding: 12px 14px !important; font-size: 15px !important; }
+}
+
+@media (prefers-color-scheme: dark) {
+    #search, #search_header, .search_box, .search_filters, #categories, .main-content {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+}

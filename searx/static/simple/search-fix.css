@@ -1,0 +1,138 @@
+/* ============================================
+   COMPREHENSIVE FIX FOR SEARCH BAR LINE ISSUE
+   ============================================ */
+
+/* Remove ALL borders from search area */
+#search,
+#search form,
+#search_header,
+#search_view,
+.search_box,
+.search_filters,
+#categories,
+.categories {
+    border: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* Remove borders from input field */
+#q,
+#search #q,
+.search_box #q,
+input[name="q"] {
+    border: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Remove focus borders */
+#q:focus,
+#search #q:focus,
+.search_box:focus-within {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Remove any hr or divider elements */
+#search hr,
+#search_header hr,
+.search_box hr,
+.search_filters hr {
+    display: none !important;
+    height: 0 !important;
+    border: none !important;
+}
+
+/* Remove pseudo-element borders */
+#search::before,
+#search::after,
+#search_header::before,
+#search_header::after,
+.search_box::before,
+.search_box::after,
+.search_filters::before,
+.search_filters::after {
+    border: none !important;
+    display: none !important;
+    content: none !important;
+}
+
+/* Remove any background lines/gradients */
+#search,
+#search_header,
+.search_box {
+    background-image: none !important;
+    background: transparent !important;
+}
+
+/* Remove any margin/padding that might create visual lines */
+.search_filters {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    border-top: none !important;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN FOR ALL DEVICES
+   ============================================ */
+
+/* Mobile (phones) */
+@media (max-width: 480px) {
+    .search_box {
+        padding: 8px !important;
+    }
+    #q {
+        font-size: 14px !important;
+    }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 1024px) {
+    .search_box {
+        padding: 10px !important;
+    }
+    #q {
+        font-size: 15px !important;
+    }
+}
+
+/* Desktop/Laptop */
+@media (min-width: 1025px) and (max-width: 1920px) {
+    .search_box {
+        padding: 12px !important;
+    }
+    #q {
+        font-size: 16px !important;
+    }
+}
+
+/* Full HD and above */
+@media (min-width: 1921px) {
+    .search_box {
+        padding: 14px !important;
+    }
+    #q {
+        font-size: 18px !important;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    #search,
+    #search_header,
+    .search_box,
+    .search_filters {
+        background: transparent !important;
+        border: none !important;
+    }
+}

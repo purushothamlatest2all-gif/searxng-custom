@@ -1,0 +1,132 @@
+{% from 'simple/icons.html' import icon_big %}
+
+{% extends "simple/base.html" %}
+
+{% block title %}{{ _('Stats') }}{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='simple/stats.css') }}" />
+{% endblock %}
+
+{% block content %}
+<div class="stats-container">
+    <h1>📊 Search Statistics</h1>
+    
+    <div id="stats-loading" class="loading-message">
+        <div class="loading-spinner"></div>
+        <p>Loading statistics...</p>
+    </div>
+    
+    <div id="stats-content" style="display: none;">
+        <div class="stats-summary">
+            <div class="summary-card">
+                <div class="summary-value" id="total-searches">0</div>
+                <div class="summary-label">Total Searches</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-value" id="today-searches">0</div>
+                <div class="summary-label">Today's Searches</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-value" id="engines-count">0</div>
+                <div class="summary-label">Active Engines</div>
+            </div>
+        </div>
+        
+        <div class="stats-section">
+            <h2>Last 7 Days</h2>
+            <div class="chart-container">
+                <div id="daily-chart" class="bar-chart"></div>
+            </div>
+        </div>
+        
+        <div class="stats-section">
+            <h2>Engine Statistics</h2>
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        <th>Engine</th>
+                        <th>Total Requests</th>
+                        <th>Today</th>
+                    </tr>
+                </thead>
+                <tbody id="engine-stats-body">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="stats-error" style="display: none;" class="error-message">
+        <p>⚠️ Unable to load statistics. The stats collector may not be running.</p>
+        <p>Please perform some searches and try again.</p>
+    </div>
+</div>
+
+<script>
+fetch('/stats-api')
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('stats-loading').style.display = 'none';
+        document.getElementById('stats-content').style.display = 'block';
+        
+        document.getElementById('total-searches').textContent = data.total_searches.toLocaleString();
+        document.getElementById('today-searches').textContent = data.today_searches.toLocaleString();
+        document.getElementById('engines-count').textContent = Object.keys(data.engines || {}).length;
+        
+        const chartContainer = document.getElementById('daily-chart');
+        chartContainer.innerHTML = '';
+        
+        const last7Days = data.last_7_days || [];
+        const maxCount = Math.max(...last7Days.map(d => d.count), 1);
+        
+        last7Days.forEach(day => {
+            const barWrapper = document.createElement('div');
+            barWrapper.className = 'bar-wrapper';
+            
+            const bar = document.createElement('div');
+            bar.className = 'bar';
+            const heightPercent = (day.count / maxCount) * 100;
+            bar.style.height = `${heightPercent}%`;
+            bar.title = `${day.date}: ${day.count} searches`;
+            
+            const label = document.createElement('div');
+            label.className = 'bar-label';
+            label.textContent = day.date.slice(5);
+            
+            const count = document.createElement('div');
+            count.className = 'bar-count';
+            count.textContent = day.count;
+            
+            barWrapper.appendChild(count);
+            barWrapper.appendChild(bar);
+            barWrapper.appendChild(label);
+            chartContainer.appendChild(barWrapper);
+        });
+        
+        const tbody = document.getElementById('engine-stats-body');
+        tbody.innerHTML = '';
+        
+        const engines = data.engines || {};
+        const sortedEngines = Object.entries(engines).sort((a, b) => b[1].total - a[1].total);
+        
+        if (sortedEngines.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#999;">No engine data yet</td></tr>';
+        } else {
+            sortedEngines.forEach(([engine, stats]) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${engine}</strong></td>
+                    <td>${stats.total.toLocaleString()}</td>
+                    <td>${stats.today.toLocaleString()}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching stats:', error);
+        document.getElementById('stats-loading').style.display = 'none';
+        document.getElementById('stats-error').style.display = 'block';
+    });
+</script>
+{% endblock %}

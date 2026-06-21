@@ -1,0 +1,229 @@
+{% extends "simple/base.html" %}
+
+{% block title %}Latest2All Search - Private, Fast, Independent{% endblock %}
+
+{% block content %}
+<div class="homepage-container">
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title"><span class="gradient-text">Latest2All Search</span></h1>
+            <p class="hero-subtitle">
+                <strong>Private metasearch powered by Brave, DuckDuckGo, and independent sources.</strong><br>
+                <span class="highlight">No tracking. No profiling. No ads.</span>
+            </p>
+        </div>
+        
+        <div class="search-container">
+            <form id="search_form" method="{{ method or 'POST' }}" action="{{ url_for('search') }}">
+                <input type="hidden" name="safesearch" value="{{ preferences.get_value('safesearch') }}">
+                <input type="hidden" name="language" value="{{ preferences.get_value('language') }}">
+                <input type="hidden" name="theme" value="{{ preferences.get_value('theme') }}">
+                
+                <div class="search-wrapper">
+                    <input type="text" name="q" class="search-input" id="search_input" placeholder="Search privately..." autocomplete="off" autofocus required>
+                    
+                    <button type="button" class="voice-btn" id="voice_btn" title="Search by voice">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="voice-icon">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            <line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line>
+                        </svg>
+                    </button>
+                    
+                    <button type="submit" class="search-btn" title="Search">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="search-icon">
+                            <circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="trust-badges">
+            <div class="badge"><svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span>No Tracking</span></div>
+            <div class="badge"><svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg><span>No Ads</span></div>
+            <div class="badge"><svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg><span>Open Source</span></div>
+            <div class="badge"><svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg><span>Fast Results</span></div>
+        </div>
+        
+        <!-- Engine Sources -->
+        <div class="engine-sources">
+            <p class="sources-title">Powered by multiple independent search engines:</p>
+            <div class="engine-logos">
+                <span class="engine-tag">🦁 Brave</span>
+                <span class="engine-tag">🦆 DuckDuckGo</span>
+                <span class="engine-tag">🔍 Mojeek</span>
+                <span class="engine-tag">🗺️ OpenStreetMap</span>
+                <span class="engine-tag">📚 OpenAlex</span>
+                <span class="engine-tag">📄 arXiv</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Trending Searches Section -->
+    <div class="trending-section" id="trending-section">
+        <h2 class="section-title">🔥 Trending Now</h2>
+        <div class="trending-grid" id="trending-grid">
+            <div class="trending-card skeleton" style="height: 60px;"></div>
+            <div class="trending-card skeleton" style="height: 60px;"></div>
+            <div class="trending-card skeleton" style="height: 60px;"></div>
+            <div class="trending-card skeleton" style="height: 60px;"></div>
+        </div>
+    </div>
+
+    <div class="features-section">
+        <h2 class="section-title">Why Choose Latest2All?</h2>
+        <div class="features-grid">
+            <div class="feature-card"><div class="feature-icon">🔒</div><h3>Privacy First</h3><p>We don't track you, store your searches, or build a profile. Your data stays yours.</p></div>
+            <div class="feature-card"><div class="feature-icon">🔍</div><h3>Multiple Engines</h3><p>Results from Brave, DuckDuckGo, Mojeek, and academic sources - all in one place.</p></div>
+            <div class="feature-card"><div class="feature-icon">⚡</div><h3>Lightning Fast</h3><p>Get results in under 1 second with our optimized search infrastructure.</p></div>
+            <div class="feature-card"><div class="feature-icon">🎓</div><h3>Science Search</h3><p>Access academic papers from arXiv, OpenAlex, Semantic Scholar, and more.</p></div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .homepage-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+    .hero-section { text-align: center; margin-bottom: 60px; }
+    .hero-content { margin-bottom: 40px; }
+    .hero-title { font-size: 48px; font-weight: 800; margin-bottom: 20px; letter-spacing: -1px; }
+    .gradient-text { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-subtitle { font-size: 20px; color: var(--text-secondary); line-height: 1.6; }
+    .hero-subtitle strong { color: var(--text-primary); font-size: 22px; }
+    .hero-subtitle .highlight { color: var(--text-primary); font-weight: 600; }
+    
+    .search-container { margin: 40px auto; max-width: 800px; }
+    .search-wrapper {
+        display: flex; align-items: center; width: 100%; background: var(--bg-secondary);
+        border-radius: var(--radius-lg); box-shadow: var(--shadow-md); overflow: hidden;
+        transition: all 0.3s ease; border: 2px solid transparent;
+    }
+    .search-wrapper:focus-within { box-shadow: var(--shadow-lg); border-color: var(--accent-primary); transform: translateY(-2px); }
+    .search-input { flex: 1; border: none; padding: 22px 30px; font-size: 18px; outline: none; background: transparent; color: var(--text-primary); min-width: 80px; }
+    
+    .voice-btn, .search-btn { border: none; padding: 22px 30px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; background: transparent; flex-shrink: 0; }
+    .voice-btn { color: var(--accent-primary); border-right: 1px solid var(--border-color); }
+    .voice-btn:hover { background: rgba(102, 126, 234, 0.1); }
+    .voice-btn.listening { background: #ff0000; color: white; animation: pulse 1.5s infinite; }
+    .search-btn { background: var(--gradient); color: white; }
+    .search-btn:hover { transform: scale(1.05); }
+    .voice-btn svg, .search-btn svg { width: 24px; height: 24px; }
+    
+    .trust-badges { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 40px; }
+    .badge { display: flex; align-items: center; gap: 8px; padding: 10px 20px; background: rgba(102, 126, 234, 0.05); border-radius: 20px; font-size: 14px; font-weight: 500; color: var(--text-primary); }
+    .badge-icon { width: 18px; height: 18px; color: var(--accent-primary); }
+    
+    /* Engine Sources */
+    .engine-sources { margin-top: 50px; padding: 30px; background: var(--bg-secondary); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); }
+    .sources-title { font-size: 16px; color: var(--text-secondary); margin-bottom: 20px; }
+    .engine-logos { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+    .engine-tag { padding: 8px 16px; background: rgba(102, 126, 234, 0.1); border-radius: 20px; font-size: 14px; font-weight: 500; color: var(--text-primary); border: 1px solid var(--border-color); }
+    
+    /* Trending Section */
+    .trending-section { margin: 60px 0; text-align: center; }
+    .trending-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; max-width: 900px; margin: 0 auto; }
+    .trending-card {
+        background: var(--bg-secondary); padding: 15px 20px; border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-sm); text-align: left; transition: all 0.3s ease;
+        border: 1px solid var(--border-color); cursor: pointer; text-decoration: none; color: var(--text-primary);
+        display: flex; align-items: center; gap: 12px;
+    }
+    .trending-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--accent-primary); }
+    .trending-rank { font-size: 24px; font-weight: 800; color: var(--accent-primary); opacity: 0.3; min-width: 30px; }
+    .trending-title { font-size: 15px; font-weight: 500; line-height: 1.4; }
+    .trending-score { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+    
+    .features-section { margin-top: 80px; }
+    .section-title { font-size: 32px; font-weight: 700; text-align: center; margin-bottom: 40px; color: var(--text-primary); }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+    .feature-card { background: var(--bg-secondary); padding: 30px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); transition: all 0.3s ease; text-align: center; border: 1px solid var(--border-color); }
+    .feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+    .feature-icon { font-size: 48px; margin-bottom: 15px; }
+    .feature-card h3 { font-size: 20px; margin-bottom: 10px; color: var(--text-primary); }
+    .feature-card p { color: var(--text-secondary); line-height: 1.6; }
+    
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+    
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .hero-title { font-size: 32px; }
+        .hero-subtitle { font-size: 16px; }
+        .hero-subtitle strong { font-size: 18px; }
+        .search-container { max-width: 100%; padding: 0 10px; }
+        .search-input { font-size: 14px; padding: 12px 15px; }
+        .voice-btn, .search-btn { padding: 12px 16px; }
+        .voice-btn svg, .search-btn svg { width: 20px; height: 20px; }
+        .trust-badges { flex-direction: column; align-items: center; gap: 12px; padding: 0 20px; }
+        .badge { width: 100%; max-width: 280px; justify-content: center; }
+        .features-grid { grid-template-columns: 1fr; padding: 0 10px; }
+        .trending-grid { grid-template-columns: 1fr; padding: 0 10px; }
+        .engine-logos { gap: 10px; }
+        .engine-tag { font-size: 12px; padding: 6px 12px; }
+    }
+    @media (max-width: 480px) {
+        .hero-title { font-size: 26px; }
+        .search-input { font-size: 13px; padding: 10px 12px; }
+        .voice-btn, .search-btn { padding: 10px 12px; }
+    }
+</style>
+
+<script>
+// Voice Search
+(function() {
+    const voiceBtn = document.getElementById('voice_btn');
+    const searchInput = document.getElementById('search_input');
+    let recognition = null;
+    
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+        
+        recognition.onstart = function() { voiceBtn.classList.add('listening'); voiceBtn.title = 'Listening... Click to stop'; };
+        recognition.onresult = function(event) {
+            searchInput.value = event.results[0][0].transcript;
+            setTimeout(() => { document.getElementById('search_form').submit(); }, 500);
+        };
+        recognition.onerror = function(event) {
+            voiceBtn.classList.remove('listening'); voiceBtn.title = 'Search by voice';
+            if (event.error === 'not-allowed') alert('Please allow microphone access.');
+        };
+        recognition.onend = function() { voiceBtn.classList.remove('listening'); voiceBtn.title = 'Search by voice'; };
+        voiceBtn.addEventListener('click', function() {
+            if (voiceBtn.classList.contains('listening')) recognition.stop();
+            else { try { recognition.start(); } catch (e) {} }
+        });
+        voiceBtn.style.cursor = 'pointer'; voiceBtn.title = 'Search by voice';
+    } else { voiceBtn.style.display = 'none'; }
+})();
+
+// Fetch Trending Searches
+(function() {
+    fetch('/static/themes/simple/img/trending.json')
+        .then(response => response.json())
+        .then(data => {
+            const grid = document.getElementById('trending-grid');
+            grid.innerHTML = '';
+            data.slice(0, 8).forEach((item, index) => {
+                const card = document.createElement('a');
+                card.className = 'trending-card';
+                card.href = '/search?q=' + encodeURIComponent(item.title);
+                card.innerHTML = `
+                    <span class="trending-rank">${index + 1}</span>
+                    <div>
+                        <div class="trending-title">${item.title}</div>
+                        <div class="trending-score"> ${item.score} points</div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        })
+        .catch(err => {
+            console.error('Trending fetch failed:', err);
+            document.getElementById('trending-section').style.display = 'none';
+        });
+})();
+</script>
+{% endblock %}

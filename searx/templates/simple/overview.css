@@ -1,0 +1,152 @@
+.ai-overview {
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    border-left: 4px solid #667eea;
+    padding: 30px;
+    margin: 25px 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.ai-overview-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #667eea33;
+}
+
+.ai-overview-header span {
+    font-size: 28px;
+    margin-right: 12px;
+}
+
+.ai-overview-header h2 {
+    margin: 0;
+    color: #667eea;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.overview-section {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+
+.overview-heading {
+    color: #667eea;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 15px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.overview-subsection {
+    margin: 15px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 3px solid #667eea;
+}
+
+.overview-subheading {
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+}
+
+.overview-text {
+    line-height: 1.8;
+    color: #444;
+    font-size: 15px;
+    margin: 0;
+    text-align: justify;
+}
+
+.overview-list {
+    margin: 0;
+    padding-left: 20px;
+    line-height: 1.8;
+}
+
+.overview-list li {
+    margin-bottom: 8px;
+    color: #444;
+}
+
+.overview-sources {
+    margin: 0;
+    padding-left: 20px;
+    line-height: 1.8;
+}
+
+.overview-sources li {
+    margin-bottom: 8px;
+}
+
+.overview-sources a {
+    color: #667eea;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.overview-sources a:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}
+
+.overview-source-extra {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 14px;
+    color: #666;
+}
+
+.overview-source-extra a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+.overview-source-extra a:hover {
+    text-decoration: underline;
+}
+
+.overview-meta {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 13px;
+    color: #888;
+    font-style: italic;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .ai-overview {
+        background: linear-gradient(135deg, #667eea22 0%, #764ba222 100%);
+    }
+    
+    .overview-section {
+        background: #2a2a2a;
+    }
+    
+    .overview-subsection {
+        background: #1a1a1a;
+    }
+    
+    .overview-text,
+    .overview-list li {
+        color: #ddd;
+    }
+    
+    .overview-heading {
+        color: #8b9dc3;
+        border-bottom-color: #444;
+    }
+}

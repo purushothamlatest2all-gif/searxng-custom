@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+venv/
+*.backup*
+*.log
+searx/settings.yml
+!searx/settings.yml.example
+nltk_data/
+spell_models/
+searx/data/frequency_dictionary_en_82_765.txt

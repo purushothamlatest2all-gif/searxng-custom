@@ -1,0 +1,195 @@
+/* ============================================
+   FINAL PERFORMANCE FIX - OPTIMIZE LCP
+   ============================================ */
+
+/* Overview container - SMALLER to avoid being LCP */
+.ai-overview {
+    min-height: 150px; /* Smaller reserved space */
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-left: 4px solid #667eea;
+    padding: 16px; /* Reduced padding */
+    margin: 16px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    contain: layout style paint;
+    content-visibility: auto;
+    contain-intrinsic-size: 0 300px;
+}
+
+/* Overview header - smaller */
+.ai-overview-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.ai-overview-header span {
+    font-size: 20px; /* Smaller icon */
+    margin-right: 8px;
+}
+
+.ai-overview-header h2 {
+    margin: 0;
+    color: #667eea;
+    font-size: 18px; /* Smaller heading */
+    font-weight: 600;
+}
+
+/* Overview sections - compact */
+.overview-section {
+    margin-bottom: 12px;
+    padding: 12px;
+    background: #f9f9f9;
+    border-radius: 6px;
+    border: 1px solid #e8e8e8;
+    contain: content;
+}
+
+.overview-heading {
+    color: #333;
+    font-size: 14px; /* Smaller heading */
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #ddd;
+}
+
+.overview-text {
+    line-height: 1.5;
+    color: #444;
+    font-size: 13px; /* Smaller text - KEY FOR LCP */
+    margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    contain: content;
+    max-height: 200px; /* Limit height */
+    overflow: hidden;
+}
+
+/* Skeleton - simple, no animation */
+.skeleton-header {
+    height: 24px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    width: 60%;
+    margin-bottom: 12px;
+}
+
+.skeleton-text {
+    height: 14px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    margin-bottom: 6px;
+}
+
+.skeleton-text.short { width: 80%; }
+.skeleton-text.medium { width: 90%; }
+.skeleton-text.long { width: 100%; }
+
+/* Make search results MORE prominent for LCP */
+#results {
+    contain: layout style paint;
+}
+
+.result {
+    contain: content;
+    margin-bottom: 16px;
+}
+
+/* Make result titles larger and more prominent */
+.result h3 {
+    font-size: 18px; /* Larger than overview */
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0 0 8px 0;
+}
+
+.result h3 a {
+    color: #1a0dab;
+    text-decoration: none;
+}
+
+.result h3 a:hover {
+    text-decoration: underline;
+}
+
+/* Result snippets - readable size */
+.result-content,
+.result-snippet {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #545454;
+    margin: 8px 0;
+}
+
+/* Result URLs */
+.result-url {
+    font-size: 13px;
+    color: #006621;
+    margin: 4px 0;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .ai-overview {
+        min-height: 120px;
+        padding: 12px;
+        margin: 12px 0;
+        contain-intrinsic-size: 0 250px;
+    }
+    
+    .ai-overview-header h2 {
+        font-size: 16px;
+    }
+    
+    .overview-heading {
+        font-size: 13px;
+    }
+    
+    .overview-text {
+        font-size: 12px;
+        line-height: 1.4;
+        max-height: 150px;
+    }
+    
+    .result h3 {
+        font-size: 16px;
+    }
+    
+    .result-content,
+    .result-snippet {
+        font-size: 13px;
+    }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+    .ai-overview {
+        background: #2a2a2a;
+        border-color: #444;
+        border-left-color: #8b9dc3;
+    }
+    
+    .skeleton-header,
+    .skeleton-text {
+        background: #333;
+    }
+    
+    .overview-section {
+        background: #1e1e1e;
+        border-color: #333;
+    }
+    
+    .overview-heading {
+        color: #ddd;
+        border-bottom-color: #444;
+    }
+    
+    .overview-text {
+        color: #ccc;
+    }
+}

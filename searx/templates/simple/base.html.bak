@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="{{ locale_rfc5646 }}" {% if rtl %} dir="rtl"{% endif %}>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>{% block title %}{% endblock %}Latest2All Search</title>
+  
+  <script type="module" src="{{ url_for('static', filename='sxng-core.min.js') }}" client_settings="{{ client_settings }}"></script>
+  {% block meta %}{% endblock %}
+  
+  {% if rtl %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='sxng-rtl.min.css') }}">
+  {% else %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='sxng-ltr.min.css') }}">
+  {% endif %}
+  
+  <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+  
+  <style>
+    :root {
+      /* Light Mode Variables */
+      --bg-primary: #f8f9fa;
+      --bg-secondary: #ffffff;
+      --text-primary: #1a1a2e;
+      --text-secondary: #6b7280;
+      --accent-primary: #667eea;
+      --accent-secondary: #764ba2;
+      --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --shadow-sm: 0 2px 10px rgba(0,0,0,0.05);
+      --shadow-md: 0 8px 30px rgba(0,0,0,0.08);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+      --border-color: rgba(0,0,0,0.05);
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 50px;
+    }
+
+    /* Dark Mode Variables */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-primary: #0f172a;
+        --bg-secondary: #1e293b;
+        --text-primary: #f1f5f9;
+        --text-secondary: #94a3b8;
+        --shadow-sm: 0 2px 10px rgba(0,0,0,0.3);
+        --shadow-md: 0 8px 30px rgba(0,0,0,0.4);
+        --shadow-lg: 0 12px 40px rgba(0,0,0,0.5);
+        --border-color: rgba(255,255,255,0.05);
+      }
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    
+    /* Top Navigation */
+    .top-nav {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border-color);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      flex-shrink: 0;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      .top-nav { background: rgba(30, 41, 59, 0.8); }
+    }
+    
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .brand-section:hover { transform: scale(1.02); }
+    
+    .brand-section img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent-primary);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .brand-name {
+      font-weight: 600;
+      font-size: 17px;
+      color: var(--text-primary);
+      letter-spacing: -0.3px;
+    }
+    
+    .nav-links { display: flex; gap: 12px; }
+    
+    .nav-links a {
+      color: var(--accent-primary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 15px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(102,126,234,0.05);
+    }
+    
+    .nav-links a:hover {
+      background: rgba(102,126,234,0.15);
+      transform: translateY(-1px);
+    }
+    
+    /* Banner */
+    .banner {
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      width: 70%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .banner:hover { transform: scale(1.01); }
+    
+    .banner img {
+      max-width: 100%;
+      height: auto;
+      max-height: 450px;
+      object-fit: contain;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .footer-banner { display: none; padding: 20px; text-align: center; cursor: pointer; }
+    .footer-banner img {
+      max-width: 100%; height: auto; max-height: 250px;
+      object-fit: contain; border-radius: var(--radius-md); box-shadow: var(--shadow-lg);
+    }
+    
+    /* Main Content */
+    .main-content {
+      padding: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      flex-shrink: 0;
+    }
+    
+    /* Loading Animation */
+    .loading-spinner {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(102, 126, 234, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--accent-primary);
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin { to { transform: rotate(360deg); } }
+    
+    .skeleton {
+      background: linear-gradient(90deg, var(--bg-secondary) 25%, rgba(102,126,234,0.1) 50%, var(--bg-secondary) 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: var(--radius-sm);
+    }
+    
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      padding: 50px 20px 30px;
+      margin-top: 60px;
+      width: 100%;
+      flex-shrink: 0;
+    }
+    
+    .footer-content { max-width: 1000px; margin: 0 auto; text-align: center; }
+    
+    .footer-profile img {
+      width: 100px; height: 100px; border-radius: 50%;
+      object-fit: cover; border: 3px solid var(--accent-primary);
+      box-shadow: var(--shadow-md); cursor: pointer; transition: transform 0.3s;
+    }
+    .footer-profile img:hover { transform: scale(1.05) rotate(2deg); }
+    
+    .footer-title {
+      font-size: 28px; font-weight: 700; margin-bottom: 10px;
+      background: var(--gradient); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    
+    .footer-description { color: var(--text-secondary); font-size: 16px; margin-bottom: 25px; }
+    
+    .social-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px; }
+    
+    .social-links a {
+      padding: 12px 24px; background: var(--gradient); color: white;
+      text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 15px;
+      transition: all 0.3s ease; box-shadow: var(--shadow-sm);
+    }
+    .social-links a:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .social-links a.blog { background: linear-gradient(135deg, #ff5722 0%, #f44336 100%); }
+    .social-links a.youtube { background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%); }
+    
+    .footer-bottom {
+      padding-top: 25px; border-top: 1px solid var(--border-color);
+      font-size: 13px; color: var(--text-secondary);
+    }
+    .footer-bottom a { color: var(--accent-primary); text-decoration: none; margin: 0 8px; }
+    .footer-bottom a:hover { text-decoration: underline; }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .top-nav { flex-direction: column; gap: 12px; padding: 15px; }
+      .nav-links { width: 100%; justify-content: center; }
+      .banner img { max-height: 250px; }
+      .footer-banner img { max-height: 150px; }
+      .footer-title { font-size: 24px; }
+      .social-links { flex-direction: column; }
+      .social-links a { width: 100%; text-align: center; }
+    }
+    
+    @media (min-width: 1441px) {
+      .banner img { max-height: 450px; }
+      .footer-banner img { max-height: 250px; }
+      .footer-profile img { width: 120px; height: 120px; }
+      .footer-title { font-size: 32px; }
+    }
+    
+    .main-content { animation: fadeIn 0.5s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body class="{{ endpoint }}_endpoint">
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <div class="brand-section" onclick="window.location.href='{{ url_for('index') }}'">
+      <!-- Custom SVG Logo -->
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="18" r="18" fill="url(#paint0_linear)"/>
+        <path d="M12 18C12 14.6863 14.6863 12 18 12C21.3137 12 24 14.6863 24 18C24 21.3137 21.3137 24 18 24C14.6863 24 12 21.3137 12 18Z" stroke="white" stroke-width="2"/>
+        <path d="M22 22L26 26" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="paint0_linear" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#667eea"/>
+            <stop offset="1" stop-color="#764ba2"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <span class="brand-name">Latest2All Search</span>
+    </div>
+    <div class="nav-links">
+      <a href="/about-latest2all">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path>
+        </svg>About
+      </a>
+      <a href="{{ url_for('preferences') }}">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>Preferences
+      </a>
+    </div>
+  </nav>
+  
+  <main class="main-content">{% block content %}{% endblock %}</main>
+  
+  <div class="banner" onclick="window.location.href='{{ url_for('index') }}'">
+    <img src="{{ url_for('static', filename='themes/simple/img/custom/banner.png') }}" alt="Latest2All Search">
+  </div>
+  
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-profile">
+        <a href="https://latest2all.com" target="_blank">
+          <img src="{{ url_for('static', filename='themes/simple/img/custom/profile.jpg') }}" alt="A Purushotham Reddy">
+        </a>
+      </div>
+      <h2 class="footer-title">Latest2All Search</h2>
+      <p class="footer-description">Privacy-respecting metasearch engine | Powered by AI & Open Source</p>
+      
+      <div class="social-links">
+        <a href="https://latest2all.com" target="_blank" rel="noopener">🌐 Website</a>
+        <a href="https://a-purushotham-reddy-latest2all.blogspot.com/" target="_blank" rel="noopener" class="blog">📝 Blog</a>
+        <a href="https://www.youtube.com/@Artificial-intelligence-1985" target="_blank" rel="noopener" class="youtube">▶️ YouTube</a>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© 2026 Latest2All. All rights reserved.</p>
+        <p style="margin-top: 10px;">
+          <a href="/privacy-policy">Privacy Policy</a> | 
+          <a href="/terms-of-service">Terms of Service</a> |
+          <a href="{{ url_for('stats') }}">Engine Stats</a>
+        </p>
+        <p style="margin-top: 10px; font-size: 12px;">Hosted and maintained by <strong>A Purushotham Reddy</strong></p>
+      </div>
+    </div>
+  </footer>
+  
+  <div class="footer-banner" onclick="window.location.href='{{ url_for('index') }}'">
+    <img src="{{ url_for('static', filename='themes/simple/img/custom/banner.png') }}" alt="Latest2All Search">
+  </div>
+  
+  <script>
+    (function() {
+      const isHomepage = window.location.pathname === '/' || window.location.pathname === '';
+      const banner = document.querySelector('.banner');
+      const footerBanner = document.querySelector('.footer-banner');
+      
+      if (isHomepage) {
+        if (banner) banner.style.display = 'block';
+        if (footerBanner) footerBanner.style.display = 'none';
+      } else {
+        if (banner) banner.style.display = 'none';
+        if (footerBanner && window.location.pathname.includes('/search')) {
+          footerBanner.style.display = 'block';
+        }
+      }
+    })();
+  </script>
+</body>
+</html>

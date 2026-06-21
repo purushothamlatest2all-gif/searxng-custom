@@ -1,0 +1,82 @@
+/* ============================================
+   CORRECTED FIX - REMOVE LINE BUT KEEP UI
+   ============================================ */
+
+/* CRITICAL: Remove ONLY the border-bottom from search_header */
+#search_header {
+    border-bottom: none !important;
+}
+
+/* Keep search_box UI but remove box-shadow */
+.search_box {
+    box-shadow: none !important;
+    /* Keep the background and border-radius for UI */
+}
+
+/* Remove borders from category buttons */
+.category,
+.category_button,
+button.category,
+.category_button.selected {
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
+/* Remove lines from search_filters */
+.search_filters {
+    border-top: none !important;
+    margin-top: 0 !important;
+}
+
+/* Remove any hr elements */
+#search hr,
+#search_header hr,
+.search_box hr,
+.search_filters hr {
+    display: none !important;
+}
+
+/* Remove pseudo-elements that might create lines */
+#search_header::before,
+#search_header::after,
+.search_box::before,
+.search_box::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 480px) {
+    .search_box { padding: 8px !important; }
+    #q { font-size: 14px !important; }
+    .category_button { padding: 6px 8px !important; font-size: 12px !important; }
+}
+
+@media (min-width: 481px) and (max-width: 1024px) {
+    .search_box { padding: 10px !important; }
+    #q { font-size: 15px !important; }
+    .category_button { padding: 8px 10px !important; font-size: 13px !important; }
+}
+
+@media (min-width: 1025px) and (max-width: 1920px) {
+    .search_box { padding: 12px !important; }
+    #q { font-size: 16px !important; }
+    .category_button { padding: 10px 12px !important; font-size: 14px !important; }
+}
+
+@media (min-width: 1921px) {
+    .search_box { padding: 14px !important; }
+    #q { font-size: 18px !important; }
+    .category_button { padding: 12px 14px !important; font-size: 15px !important; }
+}
+
+@media (prefers-color-scheme: dark) {
+    #search_header, .search_box {
+        border-bottom: none !important;
+        box-shadow: none !important;
+    }
+}

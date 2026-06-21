@@ -1,0 +1,156 @@
+/* ============================================
+   FINAL COMPREHENSIVE FIX FOR ALL LINE ISSUES
+   ============================================ */
+
+/* CRITICAL: Remove border-bottom from search_header */
+#search_header {
+    border-bottom: none !important;
+    border: none !important;
+}
+
+/* CRITICAL: Remove box-shadow from search_box (this looks like a line) */
+.search_box {
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Remove ALL borders from search area */
+#search,
+#search form,
+#search_view,
+.search_filters,
+#categories,
+.categories,
+#categories_container {
+    border: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* Remove borders from input field */
+#q,
+#search #q,
+.search_box #q,
+input[name="q"] {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Remove borders from category buttons */
+.category,
+.category_button,
+button.category,
+.category_button.selected,
+#categories button,
+#categories_container button {
+    border: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* Remove focus borders */
+#q:focus,
+.search_box:focus-within,
+.category:focus,
+.category_button:focus {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Remove any background lines/gradients */
+#search,
+#search_header,
+.search_box,
+#categories {
+    background-image: none !important;
+}
+
+/* Remove any margin/padding that might create visual lines */
+.search_filters {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    border-top: none !important;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN FOR ALL DEVICES
+   ============================================ */
+
+/* Mobile (phones) */
+@media (max-width: 480px) {
+    .search_box {
+        padding: 8px !important;
+    }
+    #q {
+        font-size: 14px !important;
+    }
+    .category_button {
+        padding: 6px 8px !important;
+        font-size: 12px !important;
+    }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 1024px) {
+    .search_box {
+        padding: 10px !important;
+    }
+    #q {
+        font-size: 15px !important;
+    }
+    .category_button {
+        padding: 8px 10px !important;
+        font-size: 13px !important;
+    }
+}
+
+/* Desktop/Laptop */
+@media (min-width: 1025px) and (max-width: 1920px) {
+    .search_box {
+        padding: 12px !important;
+    }
+    #q {
+        font-size: 16px !important;
+    }
+    .category_button {
+        padding: 10px 12px !important;
+        font-size: 14px !important;
+    }
+}
+
+/* Full HD and above */
+@media (min-width: 1921px) {
+    .search_box {
+        padding: 14px !important;
+    }
+    #q {
+        font-size: 18px !important;
+    }
+    .category_button {
+        padding: 12px 14px !important;
+        font-size: 15px !important;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    #search,
+    #search_header,
+    .search_box,
+    .search_filters,
+    #categories {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+}
