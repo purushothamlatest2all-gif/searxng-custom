@@ -20,10 +20,27 @@ def get_redis():
     return _redis_client
 
 def record_search(query, engines_used, results_count, duration):
-    """Record a search in Redis"""
+    """Record a search in Redis (privacy-focused: only counts, no query storage)"""
     r = get_redis()
     if not r:
         return
+    
+    # Only increment counters - don't store actual queries
+    from datetime import datetime
+    today = datetime.now().strftime('%Y-%m-%d')
+    
+    # Increment total searches
+    r.incr('searxng:total_searches')
+    
+    # Increment daily count
+    r.incr(f'searxng:searches:{today}')
+    r.expire(f'searxng:searches:{today}', 30 * 24 * 3600)  # 30 days retention
+    
+    # Count engine usage (aggregate only)
+    for engine in engines_used:
+        r.incr(f'searxng:engine:{engine}:requests')
+        r.incr(f'searxng:engine:{engine}:requests:{today}')
+        r.expire(f'searxng:engine:{engine}:requests:{today}', 30 * 24 * 3600)
     
     try:
         today = datetime.now().strftime('%Y-%m-%d')

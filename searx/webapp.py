@@ -1309,7 +1309,7 @@ def api_spelling():
     """Spelling correction API endpoint."""
     try:
         from searx.spell_checker import fix_query
-        data = request.get_json()
+        data = sxng_request.get_json()
         query = data.get('query', '')
         
         if not query:

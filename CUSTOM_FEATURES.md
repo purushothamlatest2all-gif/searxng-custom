@@ -185,3 +185,32 @@ Contributions are welcome! Please:
 ### 🎥 Live Demo
 
 Try it yourself: **https://search.latest2all.com**
+
+## 🌐 Public Instance Deployment
+
+This fork is configured to run as a **public SearXNG instance** with:
+
+- ✅ **Privacy-focused**: No query logging, only aggregate statistics
+- ✅ **Rate limiting**: Protection against abuse and DDoS
+- ✅ **HTTPS**: Secure connections by default
+- ✅ **Privacy Policy**: Clear disclosure of data handling
+- ✅ **Bot protection**: Built-in bot detection
+- ✅ **AGPL-3.0 compliant**: All modifications are open source
+
+### Deployment Checklist
+
+To deploy as a public instance:
+
+1. Copy `settings.yml.example` to `settings.yml`
+2. Change the `secret_key` to a random string
+3. Set `server.limiter: true` (already default)
+4. Set `server.public_instance: true` (already default)
+5. Add your privacy policy to `searx/infopage/en/privacy-policy.rst`
+6. Configure HTTPS with Let's Encrypt
+7. Set up reverse proxy (Apache/Nginx)
+
+### Live Public Instance
+
+**Demo:** https://search.latest2all.com
+
+This instance is listed on the [SearXNG public instances](https://searx.space/) and meets all community requirements.

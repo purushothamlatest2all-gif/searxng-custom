@@ -4464,11 +4464,11 @@ server:
     X-Robots-Tag: noindex, nofollow
   http_protocol_version: '1.0'
   image_proxy: false
-  limiter: false
+  limiter: true
   method: POST
   port: 8888
-  public_instance: false
-  secret_key: 6c0f3739e55a2f8e532501c50c6824c3a7d6a183f5346989fdf29ab61a749263
+  public_instance: true
+  secret_key: "ultrasecretkey_change_this_to_a_random_string"
 ui:
   center_alignment: false
   default_locale: ''
