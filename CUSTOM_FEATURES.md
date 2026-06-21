@@ -215,3 +215,19 @@ To deploy as a public instance:
 **Demo:** https://search.latest2all.com
 
 This instance is listed on the [SearXNG public instances](https://searx.space/) and meets all community requirements.
+
+
+## 🔒 Privacy Policy
+
+This fork includes a built-in privacy policy page accessible at `/privacy-policy`.
+
+**Features:**
+- Clear disclosure of data handling practices
+- No query logging (only aggregate counts)
+- No IP or user agent logging
+- No tracking cookies
+- Compliant with SearXNG public instance requirements
+
+**Access:** https://search.latest2all.com/privacy-policy
+
+The privacy policy is implemented in `searx/infopage/en/privacy-policy.rst` and served via a custom route in `webapp.py`.

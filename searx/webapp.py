@@ -1354,6 +1354,47 @@ def api_overview():
         traceback.print_exc()
         return jsonify({'error': str(e)}), 500
 
+
+
+
+@app.route('/privacy-policy')
+def privacy_policy():
+    """Privacy policy page - simple HTML response."""
+    try:
+        policy_path = '/usr/local/searxng/searxng/searx/infopage/en/privacy-policy.rst'
+        with open(policy_path, 'r') as f:
+            rst_content = f.read()
+        
+        # Convert RST to simple HTML
+        html_content = rst_content.replace('\n', '<br>')
+        html_content = html_content.replace('==============', '<hr>')
+        html_content = html_content.replace('--------------', '<hr>')
+        html_content = html_content.replace('**', '<strong>', 1)
+        
+        # Simple HTML response using base template
+        return f"""<!DOCTYPE html>
+<html>
+<head>
+    <title>Privacy Policy - Latest2All Search</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.6; }}
+        h1 {{ color: #667eea; border-bottom: 2px solid #667eea; padding-bottom: 10px; }}
+        h2 {{ color: #764ba2; margin-top: 30px; }}
+        pre {{ white-space: pre-wrap; font-family: inherit; background: #f8f9fa; padding: 15px; border-radius: 8px; }}
+        a {{ color: #667eea; }}
+    </style>
+</head>
+<body>
+    <h1>🔒 Privacy Policy</h1>
+    <pre>{rst_content}</pre>
+    <p><a href="/">← Back to Search</a></p>
+</body>
+</html>"""
+    except Exception as e:
+        return f"<h1>Error</h1><p>Could not load privacy policy: {str(e)}</p>", 500
+
 @app.errorhandler(404)
 def page_not_found(_e):
     return render('404.html'), 404
