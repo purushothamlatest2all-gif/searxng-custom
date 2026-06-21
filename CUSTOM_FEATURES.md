@@ -231,3 +231,9 @@ This fork includes a built-in privacy policy page accessible at `/privacy-policy
 **Access:** https://search.latest2all.com/privacy-policy
 
 The privacy policy is implemented in `searx/infopage/en/privacy-policy.rst` and served via a custom route in `webapp.py`.
+
+## ⚙️ Deployment
+
+- Port: 8080 (change if conflict)
+- Rate limiter: Disabled (set true + configure /etc/searxng/limiter.toml to enable)
+- See searx/settings.yml.example for full config

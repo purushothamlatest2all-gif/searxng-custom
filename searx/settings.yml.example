@@ -4468,7 +4468,7 @@ server:
   method: POST
   port: 8888
   public_instance: false
-  secret_key: ultrasecretkey_change_this_to_a_random_string
+  secret_key: ultrasecretkey_change_this
   pass_ip:
   - 49.43.240.163
   - 162.0.230.191

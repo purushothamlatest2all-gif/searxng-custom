@@ -1,9 +1,16 @@
+# Minimal valid limiter schema for SearXNG
+# Required even when limiter is disabled
+
+[botdetection]
+ipv4_prefix = 0
+ipv6_prefix = 0
+trusted_proxies = []
+
 [botdetection.ip_limit]
-link_token = true
+filter_link_local = false
+link_token = false
 
 [botdetection.ip_lists]
-pass_ip = [
-  "127.0.0.0/8",
-  "162.0.230.191/32",
-  "49.43.240.163/32",
-]
+block_ip = []
+pass_ip = []
+pass_searxng_org = true
