@@ -4468,7 +4468,10 @@ server:
   method: POST
   port: 8888
   public_instance: true
-  secret_key: "ultrasecretkey_change_this_to_a_random_string"
+  secret_key: ultrasecretkey_change_this_to_a_random_string
+  pass_ip:
+  - 49.43.240.163
+  - 162.0.230.191
 ui:
   center_alignment: false
   default_locale: ''
@@ -4483,15 +4486,14 @@ ui:
   url_formatting: pretty
 valkey:
   url: false
-
-# Statistics configuration
 stats:
   enabled: true
-  # Store stats in Redis for persistence
   storage: redis
-  # How often to flush stats (in seconds)
   flush_interval: 3600
-
-# Redis configuration for statistics and rate limiting
 redis:
   url: redis://localhost:6379/0
+botdetection:
+  ip_lists:
+    pass_ip:
+    - 49.43.240.163
+    - 162.0.230.191
