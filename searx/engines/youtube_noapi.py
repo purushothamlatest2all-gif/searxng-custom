@@ -1,3 +1,4 @@
+import os
 # SPDX-License-Identifier: AGPL-3.0-or-later
 """Youtube (Videos)"""
 
@@ -28,7 +29,9 @@ base_url = 'https://www.youtube.com/results'
 search_url = base_url + '?search_query={query}&page={page}'
 time_range_url = '&sp=EgII{time_range}%253D%253D'
 # the key seems to be constant
-next_page_url = 'https://www.youtube.com/youtubei/v1/search?key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8'
+# YouTube API key (public key, can be overridden via environment variable)
+_youtube_api_key = os.environ.get('YOUTUBE_API_KEY', 'AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8')
+next_page_url = f'https://www.youtube.com/youtubei/v1/search?key={_youtube_api_key}'
 time_range_dict = {'day': 'Ag', 'week': 'Aw', 'month': 'BA', 'year': 'BQ'}
 
 base_youtube_url = 'https://www.youtube.com/watch?v='
