@@ -237,3 +237,13 @@ The privacy policy is implemented in `searx/infopage/en/privacy-policy.rst` and 
 - Port: 8080 (change if conflict)
 - Rate limiter: Disabled (set true + configure /etc/searxng/limiter.toml to enable)
 - See searx/settings.yml.example for full config
+
+## 🔒 Rate Limiting (Public Instance)
+
+Enabled with lenient limits for humans:
+- Admin IPs whitelisted: 127.0.0.0/8, server IP, PC IP
+- Link token enabled for bot protection
+- Limits: 1000 GET / 500 POST requests per 5 minutes
+- Configurable via searx/limiter.toml
+
+See: https://docs.searxng.org/admin/searx.limiter.html

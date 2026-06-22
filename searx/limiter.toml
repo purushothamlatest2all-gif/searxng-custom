@@ -1,16 +1,31 @@
-# Minimal valid limiter schema for SearXNG
-# Required even when limiter is disabled
+# SearXNG Limiter Config - Latest2All Search (Combined Schema+Config)
+# This file works as both the schema (for limiter.py) and user config
 
 [botdetection]
-ipv4_prefix = 0
-ipv6_prefix = 0
-trusted_proxies = []
+# Schema: 0 = accept any value | Config: actual prefix values
+ipv4_prefix = 32
+ipv6_prefix = 48
+trusted_proxies = ['127.0.0.0/8', '162.0.230.191/32']
 
 [botdetection.ip_limit]
+# Schema: false = accept any | Config: actual settings
 filter_link_local = false
-link_token = false
+link_token = true
 
 [botdetection.ip_lists]
+# Schema: [] = accept any list | Config: actual whitelist
 block_ip = []
-pass_ip = []
+pass_ip = ['127.0.0.0/8', '162.0.230.191/32', '49.43.240.163/32']
 pass_searxng_org = true
+
+[botdetection.ip_limit.filter_request]
+# Very lenient limits for public instance testing
+limit = 1000
+burst = 200
+time_window = 300
+
+[botdetection.ip_limit.filter_post]
+# POST requests (searches)
+limit = 500
+burst = 100
+time_window = 300
