@@ -1,43 +1,141 @@
-# SearXNG settings
-
-use_default_settings: true
+use_default_settings:
+  engines:
+    keep_only:
+      - google
+      - bing
+      - brave
+      - wikipedia
+      - arxiv
+      - semantic scholar
+      - openalex
+      - crossref
+      - pubmed
 
 general:
-  debug: false
-  instance_name: "SearXNG"
+  debug: False
+  instance_name: "Latest2All Search"
+  contact_url: "https://latest2all.com"
+  enable_metrics: True
 
 search:
-  safe_search: 2
-  autocomplete: 'duckduckgo'
+  safe_search: 0
+  autocomplete: "google"
+  default_lang: "auto"
+  default_categories:
+    - general
+    - science
   formats:
     - html
+    - json
 
 server:
-  # Is overwritten by ${SEARXNG_SECRET}
-  secret_key: "ultrasecretkey"
-  limiter: true
-  image_proxy: true
-  # public URL of the instance, to ensure correct inbound links. Is overwritten
-  # by ${SEARXNG_BASE_URL}.
-  # base_url: http://example.com/location
+  bind_address: "127.0.0.1"
+  port: 8080
+  base_url: "https://search.latest2all.com/"
+  limiter: True
+  public_instance: true
+  image_proxy: True
+  secret_key: "656c2a6b77a2cf1ea148f2a247830ab18d6d1dea3a98c59ddf5823dd14d0dc68"
 
-valkey:
-  # URL to connect valkey database. Is overwritten by ${SEARXNG_VALKEY_URL}.
-  url: valkey://localhost:6379/0
+ui:
+  static_use_hash: True
+  default_theme: simple
+  theme_args:
+    simple_style: auto
 
-# preferences:
-#   lock:
-#     - autocomplete
-#     - method
+redis:
+  url: "redis://localhost:6379/0"
 
-# engines:
-#
-#   - name: fdroid
-#     disabled: false
-#
-#   - name: apk mirror
-#     disabled: false
-#
-#   - name: mediathekviewweb
-#     categories: TV
-#     disabled: false
+botdetection:
+  ip_limit:
+    link_token: true
+    requests: 30
+    burst: 10
+  ip_lists:
+    pass_ip: []
+    block_ip:
+      - 49.43.240.163/32
+      - 195.178.110.159/32
+
+outgoing:
+  request_timeout: 6.0
+  max_request_timeout: 15.0
+  pool_connections: 100
+  pool_maxsize: 20
+
+enabled_plugins:
+  - 'Hash plugin'
+  - 'Self Information'
+  - 'Tracker URL remover'
+
+doi_resolvers:
+  oadoi.org: 'https://oadoi.org/'
+  doi.org: 'https://doi.org/'
+  doai.io: 'https://dissem.in/'
+  arxiv.org: 'https://arxiv.org/'
+
+default_doi_resolver: 'doi.org'
+
+engines:
+  - name: google
+    engine: google
+    shortcut: g
+    disabled: false
+    timeout: 6.0
+    categories: general
+
+  - name: bing
+    engine: bing
+    shortcut: b
+    disabled: false
+    timeout: 6.0
+    categories: general
+
+  - name: brave
+    engine: brave
+    shortcut: br
+    disabled: false
+    timeout: 6.0
+    categories: general
+
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: wp
+    disabled: false
+    timeout: 4.0
+    categories: general
+
+  - name: arxiv
+    engine: arxiv
+    shortcut: arx
+    disabled: false
+    timeout: 8.0
+    categories: science
+
+  - name: semantic scholar
+    engine: semantic_scholar
+    shortcut: se
+    disabled: false
+    timeout: 8.0
+    categories: science
+
+  - name: openalex
+    engine: openalex
+    shortcut: oa
+    disabled: false
+    timeout: 8.0
+    categories: science
+
+  - name: crossref
+    engine: crossref
+    shortcut: cr
+    disabled: false
+    timeout: 8.0
+    categories: science
+
+  - name: pubmed
+    engine: pubmed
+    shortcut: pm
+    disabled: false
+    timeout: 8.0
+    categories: science
