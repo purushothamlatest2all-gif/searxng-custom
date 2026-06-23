@@ -6,7 +6,6 @@
 
 ![AI Overview Demo](assets/screenshots/Latest2all-searxng-result-page-AI-overview.gif)
 
-**Live Demo:** https://search.latest2all.com
 
 </div>
 
